@@ -1,6 +1,7 @@
 package com.example.qianyiwang.androidcustomizewatchface2;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -36,6 +37,7 @@ public class RetrieveBackgroundInfo extends Service{
     private Handler mHandlerTime = new Handler();
     int battery_time_count, sensor_time_count;
     boolean sensor_flag;
+    BroadcastReceiver broadcastReceiver;
 
     @Nullable
     @Override
@@ -50,7 +52,20 @@ public class RetrieveBackgroundInfo extends Service{
         mSensorManager = ((SensorManager) getSystemService(SENSOR_SERVICE));
         mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
         sensor_flag = true;
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                receiveBroadcast(intent);
+            }
+        };
+        registerReceiver(broadcastReceiver, new IntentFilter(QWangsWatchFace.BROADCAST_AMBIENT));
+
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void receiveBroadcast(Intent intent) {
+
     }
 
     @Override

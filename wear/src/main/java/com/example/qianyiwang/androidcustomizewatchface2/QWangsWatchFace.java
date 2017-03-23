@@ -55,6 +55,7 @@ import static android.support.v4.app.ActivityCompat.startActivityForResult;
 public class QWangsWatchFace extends CanvasWatchFaceService {
 
     final String TAG = "QWangsWatchFace";
+    public static final String BROADCAST_AMBIENT = "ambient_message";
 
     /*
      * Update rate in milliseconds for interactive mode. We update once a second to advance the
@@ -137,7 +138,6 @@ public class QWangsWatchFace extends CanvasWatchFaceService {
         Canvas canvas;
         int hr_value_last;
         Intent broadCastIntent;
-        public static final String BROADCAST_AMBIENT = "ambient_message";
 
         @Override
         public void onCreate(SurfaceHolder holder) {
